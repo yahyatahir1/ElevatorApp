@@ -6,6 +6,23 @@ export default Component.extend({
   // This will contain our results
   results: {},
 
+  // New floor
+  newFloor: {
+    population: null
+  },
+
+  // Check if the user has added floors
+  hasFloors: Ember.computed('inputUpdated', function()
+  {
+    // Get the number of floors
+    let numberOfFloors = Object.keys(this.get('calc.input.U')).length;
+
+    // Check if we have more than one floor
+    return numberOfFloors > 1 ? true : false;
+  }),
+
+  inputUpdated: null,
+
   didInsertElement()
   {
     // Create the calculator
@@ -23,7 +40,7 @@ export default Component.extend({
     });
   },
 
-  reRunCalculator: Ember.observer('calc.input.{LOSS,to,tc,L,pass,tl,tu,CF,CC,df,v}', function()
+  reRunCalculator: Ember.observer('inputUpdated', 'calc.input.{LOSS,to,tc,L,pass,tl,tu,CF,CC,df,v}', function()
   {
     // Run the calculator
     this.get('calc').run();
@@ -35,13 +52,29 @@ export default Component.extend({
   actions: {
     resetCalculator()
     {
-      // Get the keys
-      let keys = Object.keys(this.get('calc.defaultInput'));
-
       // Reset the input values
-      keys.forEach(key => {
-        this.set(`calc.input.${key}`, this.get('calc.defaultInput')[key]);
-      });
+      this.set('calc.input', JSON.parse(JSON.stringify(this.get('calc.defaultInput'))));
+
+      // Flag the input has been updated
+      this.set('inputUpdated', Date.now());
+    },
+
+    addNewFloor()
+    {
+      // Get the index of the new floor
+      let newFloorIndex = Object.keys(this.get('calc.input.U')).length + 1;
+
+      // Add the new floor with it's population
+      this.set(`calc.input.U.${newFloorIndex}`, parseFloat(this.get('newFloor.population')));
+
+      // Clear the population field
+      this.set('newFloor.population', null);
+
+      // Update the number of floors above the main terminal
+      this.set('calc.input.N', newFloorIndex - 1);
+
+      // Flag the input has been updated
+      this.set('inputUpdated', Date.now());
     }
   }
 });

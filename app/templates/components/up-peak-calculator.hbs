@@ -107,87 +107,122 @@
       </div>
     </div>
 
+    <!-- Add Floor -->
+    <div class="row mt-5">
+      <div class="col-sm-6 pb-5">
+        <label>Population</label>
+        {{input class="form-control" value=newFloor.population}}
+      </div>
+
+      <div class="col-sm-6 pb-5">
+        <button class="btn btn-lg btn-primary" {{action 'addNewFloor'}}>
+          Add Floor
+        </button>
+      </div>
+    </div>
+
+    <!-- Floors -->
+    <table class="table m-3">
+      <tbody>
+        <tr>
+          <th>Floor No.</th>
+          <th>Population</th>
+        </tr>
+
+        {{#each-in calc.input.U as |floorNumber population|}}
+          <tr>
+            <td>{{floorNumber}}</td>
+            <td>{{population}}</td>
+          </tr>
+        {{/each-in}}
+      </tbody>
+    </table>
+
     <!-- Reset function -->
     <button class="btn btn-lg btn-primary" {{action 'resetCalculator'}}>
       Reset Calculator
     </button>
 
     <!-- Results -->
-    <table class="table mt-5">
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Result</th>
-      </tr>
+    {{#if hasFloors}}
+      <table class="table mt-5">
+        <tbody>
+          <tr>
+            <th>Name</th>
+            <th>Result</th>
+          </tr>
 
-      <tr>
-        <td>Round Trip Time</td>
-        <td>{{results.RTT}}</td>
-      </tr>
+          <tr>
+            <td>Round Trip Time</td>
+            <td>{{results.RTT}}</td>
+          </tr>
 
-      <tr>
-        <td>Round Trip Time (incl. losses)</td>
-        <td>{{results.RTTPL}}</td>
-      </tr>
+          <tr>
+            <td>Round Trip Time (incl. losses)</td>
+            <td>{{results.RTTPL}}</td>
+          </tr>
 
-      <tr>
-        <td>UPPINT</td>
-        <td>{{results.UPPINT}}</td>
-      </tr>
+          <tr>
+            <td>UPPINT</td>
+            <td>{{results.UPPINT}}</td>
+          </tr>
 
-      <tr>
-        <td>UPPHC</td>
-        <td>{{results.UPPHC}}</td>
-      </tr>
+          <tr>
+            <td>UPPHC</td>
+            <td>{{results.UPPHC}}</td>
+          </tr>
 
-      <tr>
-        <td>TP</td>
-        <td>{{results.tp}}</td>
-      </tr>
+          <tr>
+            <td>TP</td>
+            <td>{{results.tp}}</td>
+          </tr>
 
-      <tr>
-        <td>Number of Passengers</td>
-        <td>{{results.P}}</td>
-      </tr>
+          <tr>
+            <td>Number of Passengers</td>
+            <td>{{results.P}}</td>
+          </tr>
 
-      <tr>
-        <td>H</td>
-        <td>{{results.H}}</td>
-      </tr>
+          <tr>
+            <td>H</td>
+            <td>{{results.H}}</td>
+          </tr>
 
-      <tr>
-        <td>S</td>
-        <td>{{results.S}}</td>
-      </tr>
+          <tr>
+            <td>S</td>
+            <td>{{results.S}}</td>
+          </tr>
 
-      <tr>
-        <td>POP</td>
-        <td>{{results.POP}}</td>
-      </tr>
+          <tr>
+            <td>POP</td>
+            <td>{{results.POP}}</td>
+          </tr>
 
-      <tr>
-        <td>T</td>
-        <td>{{results.T}}</td>
-      </tr>
+          <tr>
+            <td>T</td>
+            <td>{{results.T}}</td>
+          </tr>
 
-      <tr>
-        <td>TV</td>
-        <td>{{results.tv}}</td>
-      </tr>
+          <tr>
+            <td>TV</td>
+            <td>{{results.tv}}</td>
+          </tr>
 
-      <tr>
-        <td>S</td>
-        <td>{{results.S}}</td>
-      </tr>
+          <tr>
+            <td>S</td>
+            <td>{{results.S}}</td>
+          </tr>
 
-      <tr>
-        <td>UEFF</td>
-        <td>{{results.Ueff}}</td>
-      </tr>
+          <tr>
+            <td>UEFF</td>
+            <td>{{results.Ueff}}</td>
+          </tr>
 
-      <tr>
-        <td>V TEST</td>
-        <td>{{calc.input.v}}</td>
-      </tr>
-    </table>
+          <tr>
+            <td>V TEST</td>
+            <td>{{calc.input.v}}</td>
+          </tr>
+        </tbody>
+      </table>
+    {{/if}}
   </div>
 {{/if}}
