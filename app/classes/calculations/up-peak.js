@@ -19,6 +19,82 @@ export default class UpPeakCalculator
   constructor()
   {
     /**
+     * This is the default input property
+     * @type {object}
+     */
+    this.defaultInput = {
+
+      // Capacity factor (%)
+      'CF': 82,
+
+      // Car (rated) capacity (persons)
+      'CC': 6,
+
+      // Number of floors above main terminal
+      'N': 7,
+
+      // Population of floors (persons)
+      'U': {
+        '1': 0,
+        '2': 50,
+        '3': 50,
+        '4': 50,
+        '5': 50,
+        '6': 50,
+        '7': 50,
+        '8': 50
+      },
+
+      // Jerk (m/s/s/s)
+      'j': 1.4,
+
+      // Passenger loading time per person (s)
+      'tl': 1.2,
+
+      // Passenger unloading time per person (s)
+      'tu': 1.2,
+
+      // Average inter-floor height (m)
+      'df': 2.4,
+
+      // Contract (rated) speed (m/s) - one of 1, 1.5, 2.5, 3.5 or 5
+      'v': 1,
+
+      // Acceleration (m/s/s)
+      'a': {
+        '1': 0.4,
+        '1.5': 0.7,
+        '2.5': 0.8,
+        '3.5': 1,
+        '5': 1.2
+      },
+
+      // Single Floor Flight Time, 3.3m floor height (s)
+      'tfl': {
+        '1': 7,
+        '1.5': 6,
+        '2.5': 4.8,
+        '3.5': 4,
+        '5': 3.7
+      },
+
+      // Door closing time (s)
+      'tc': 2.9,
+
+      // Door opening time (s)
+      'to': 1.8,
+
+      // Round trip time losses (%)
+      'LOSS': 5,
+
+      // Number of elevators
+      'L': 4,
+
+      // Number of Passengers
+      'pass': 5
+    };
+
+    /**
      * This is the input property
      * @type {object}
      */
@@ -58,7 +134,7 @@ export default class UpPeakCalculator
       'df': 2.4,
 
       // Contract (rated) speed (m/s) - one of 1, 1.5, 2.5, 3.5 or 5
-      'v': 1.5,
+      'v': 1,
 
       // Acceleration (m/s/s)
       'a': {
@@ -91,7 +167,7 @@ export default class UpPeakCalculator
       'L': 4,
 
       // Number of Passengers
-      'pass': 5,
+      'pass': 5
     };
 
     /**
@@ -112,7 +188,7 @@ export default class UpPeakCalculator
   {
     // It's an input value
     if (this.input[value]) {
-      return this.input[value];
+      return isNaN(parseFloat(this.input[value])) ? this.input[value] : parseFloat(this.input[value]);
     }
 
     // It's a calculated value

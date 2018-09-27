@@ -23,14 +23,25 @@ export default Component.extend({
     });
   },
 
-  actions: {
-    runCalculator()
-    {
-      // Run the calculator
-      this.get('calc').run();
+  reRunCalculator: Ember.observer('calc.input.{LOSS,to,tc,L,pass,tl,tu,CF,CC,df,v}', function()
+  {
+    // Run the calculator
+    this.get('calc').run();
 
-      // Update results
-      this.updateResults();
+    // Update results
+    this.updateResults();
+  }),
+
+  actions: {
+    resetCalculator()
+    {
+      // Get the keys
+      let keys = Object.keys(this.get('calc.defaultInput'));
+
+      // Reset the input values
+      keys.forEach(key => {
+        this.set(`calc.input.${key}`, this.get('calc.defaultInput')[key]);
+      });
     }
   }
 });
