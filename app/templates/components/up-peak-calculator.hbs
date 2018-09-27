@@ -26,6 +26,11 @@
       </div>
 
       <div class="col-sm-4 pb-5">
+        <label>Number of floors</label>
+        {{input class="form-control" value=calc.input.N}}
+      </div>
+
+      <div class="col-sm-4 pb-5">
         <label>Number of Passengers</label>
         {{input class="form-control" value=calc.input.pass}}
       </div>
@@ -38,6 +43,11 @@
       <div class="col-sm-4 pb-5">
         <label>Passenger unloading time per person (s)</label>
         {{input class="form-control" value=calc.input.tu}}
+      </div>
+
+      <div class="col-sm-4 pb-5">
+        <label>Jerk (m/s/s/s)</label>
+        {{input class="form-control" value=calc.input.j}}
       </div>
 
       <div class="col-sm-4 pb-5">
@@ -104,6 +114,53 @@
             </span>
           </label>
         </div>
+      </div>
+
+      <div class="col-sm-4 pb-5">
+        <label>Population of floors</label>
+
+        <select class="dropdown-toggle nav-link">
+          <option value={{get calc.input.U 1}} name="calc-input-u" onchange={{action (mut calc.input.u) value="target.value"}}>1</option>
+          <option value={{get calc.input.U 2}}>2</option>
+          <option value={{get calc.input.U 3}}>3</option>
+          <option value={{get calc.input.U 4}}>4</option>
+          <option value={{get calc.input.U 5}}>5</option>
+          <option value={{get calc.input.U 6}}>6</option>
+          <option value={{get calc.input.U 7}}>7</option>
+          <option value={{get calc.input.U 8}}>8</option>
+        </select>
+
+        <!-- Add floor -->
+        <button class="btn btn-lg btn-primary" {{action 'addFloor'}}>
+          Add Floor
+        </button>
+
+        <table>
+          <tr>
+            <td>{{get calc.input.U 1}}</td>
+          </tr>
+          <tr>
+            <td>{{get calc.input.U 2}}</td>
+          </tr>
+          <tr>
+            <td>{{get calc.input.U 3}}</td>
+          </tr>
+          <tr>
+            <td>{{get calc.input.U 4}}</td>
+          </tr>
+          <tr>
+            <td>{{get calc.input.U 5}}</td>
+          </tr>
+          <tr>
+            <td>{{get calc.input.U 6}}</td>
+          </tr>
+          <tr>
+            <td>{{get calc.input.U 7}}</td>
+          </tr>
+          <tr>
+            <td>{{get calc.input.U 8}}</td>
+          </tr>
+        </table>
       </div>
     </div>
 
