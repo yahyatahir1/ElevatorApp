@@ -19,6 +19,9 @@ module.exports = function(defaults) {
   // modules that you would like to import into your application
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
-  app.import('bower_components/material-kit/assets/css/material-kit.css');
+
+  // Bootstrap Material Kit
+  app.import('node_modules/material-kit/assets/js/material-kit.js');
+  app.import('node_modules/material-kit/assets/css/material-kit.css');
   return app.toTree();
 };
