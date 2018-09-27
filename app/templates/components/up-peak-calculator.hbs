@@ -1,0 +1,113 @@
+<h1 class="title">Up Peak Calculator</h1>
+
+<!-- Our calculator is setup -->
+{{#if calc}}
+
+<div class="col-lg-3 col-sm-4">
+    <div class="form-group has-default bmd-form-group">
+
+        <!-- Input -->
+        <h4>Round trip time losses (%)</h4><br>
+        {{input class="form-control" value=calc.input.LOSS}}<br><br>
+
+        <h4>Door opening time (s)</h4><br>
+        {{input class="form-control" value=calc.input.to}}<br><br>
+
+        <h4>Number of elevators</h4><br>
+        {{input class="form-control" value=calc.input.L}}<br><br>
+
+        <h4>Number of Passengers</h4><br>
+        {{input class="form-control" value=calc.input.pass}}<br><br>
+
+        <h4>TL</h4><br>
+        {{input class="form-control" value=calc.input.tl}}<br><br>
+
+        <h4>TU</h4><br>
+        {{input class="form-control" value=calc.input.tu}}<br><br>
+
+        <h4>CF</h4><br>
+        {{input class="form-control" value=calc.input.CF}}<br><br>
+
+        <h4>CC</h4><br>
+        {{input class="form-control" value=calc.input.CC}}<br><br>
+
+        <h4>TC</h4><br>
+        {{input class="form-control" value=calc.input.tc}}<br><br>
+
+        <h4>Average inter-floor height (m)</h4><br>
+        {{input class="form-control" value=calc.input.df}}<br><br>
+
+        <h4>Contract (rated) speed (m/s)</h4><br>
+        {{input class="form-control" value=calc.input.v}}<br><br>
+
+    </div>
+</div>
+
+  <!-- Run function -->
+  <button class="btn btn-primary" {{action 'runCalculator'}}>
+    Run Calculator
+  </button>
+
+  <hr>
+
+  <!-- Results -->
+<table class="table">
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Result</th>
+  </tr>
+  <tr>
+    <td>Round Trip Time</td>
+    <td>{{results.RTT}}</td>
+  </tr>
+  <tr>
+    <td>Round Trip Time (incl. losses)</td>
+    <td>{{results.RTTPL}}</td>
+  </tr>
+  <tr>
+    <td>UPPINT</td>
+    <td>{{results.UPPINT}}</td>
+  </tr>
+  <tr>
+    <td>UPPHC</td>
+    <td>{{results.UPPHC}}</td>
+  </tr>
+  <tr>
+    <td>TP</td>
+    <td>{{results.tp}}</td>
+  </tr>
+  <tr>
+    <td>Number of Passengers</td>
+    <td>{{results.P}}</td>
+  </tr>
+  <tr>
+    <td>H</td>
+    <td>{{results.H}}</td>
+  </tr>
+  <tr>
+    <td>S</td>
+    <td>{{results.S}}</td>
+  </tr>
+  <tr>
+    <td>POP</td>
+    <td>{{results.POP}}</td>
+  </tr>
+  <tr>
+    <td>T</td>
+    <td>{{results.T}}</td>
+  </tr>
+  <tr>
+    <td>TV</td>
+    <td>{{results.tv}}</td>
+  </tr>
+  <tr>
+    <td>S</td>
+    <td>{{results.S}}</td>
+  </tr>
+  <tr>
+    <td>UEFF</td>
+    <td>{{results.Ueff}}</td>
+  </tr>
+</table>
+
+{{/if}}
