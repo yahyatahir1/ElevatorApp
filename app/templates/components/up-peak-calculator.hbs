@@ -107,14 +107,8 @@
       </div>
     </div>
 
-    <!-- Next -->
-    {{#if isNextShowing }}
-      <p>Put hidden stuff here</p>
-    {{else}}
-      <button class="btn btn-lg btn-primary" {{action 'textShow'}}>
-        Next
-      </button>
-    {{/if}}
+    <!-- Next which allows the user to move to the next stage -->
+    {{#if isNextOne}}
 
     <!-- Add Floor -->
     <div class="row mt-5">
@@ -147,11 +141,7 @@
       </tbody>
     </table>
 
-    <!-- Reset function -->
-    <button class="btn btn-lg btn-primary" {{action 'resetCalculator'}}>
-      Reset Calculator
-    </button>
-
+    {{#if isNextTwo}}
     <!-- Results -->
     {{#if hasFloors}}
       <table class="table mt-5">
@@ -233,5 +223,23 @@
         </tbody>
       </table>
     {{/if}}
+
+    {{else}}
+      <button class="btn btn-lg btn-primary" {{action 'NextTwo'}}>
+        Show Results
+      </button>
+    {{/if}}
+
+    <!-- Reset function -->
+    <button class="btn btn-lg btn-primary" {{action 'resetCalculator'}}>
+      Reset Calculator
+    </button>
+
+    {{else}}
+      <button class="btn btn-lg btn-primary" {{action 'nextOne'}}>
+        Next
+      </button>
+    {{/if}}
+
   </div>
 {{/if}}

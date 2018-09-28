@@ -11,7 +11,9 @@ export default Component.extend({
     population: null
   },
 
-
+  // Hides text
+  isNextOne: false,
+  isNextTwo: false,
 
   // Check if the user has added floors
   hasFloors: Ember.computed('inputUpdated', function()
@@ -79,14 +81,11 @@ export default Component.extend({
       this.set('inputUpdated', Date.now());
     },
 
-    // Hides text
-    isNextShowing: false,
-
-    actions: {
-      textShow() {
-        this.set('isNextShowing', true);
-      }
+    nextOne() {
+      this.set('isNextOne', true);
+    },
+    NextTwo() {
+      this.set('isNextTwo', true);
     }
   }
-
 });
