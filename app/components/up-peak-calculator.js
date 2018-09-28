@@ -11,6 +11,8 @@ export default Component.extend({
     population: null
   },
 
+
+
   // Check if the user has added floors
   hasFloors: Ember.computed('inputUpdated', function()
   {
@@ -75,6 +77,16 @@ export default Component.extend({
 
       // Flag the input has been updated
       this.set('inputUpdated', Date.now());
+    },
+
+    // Hides text
+    isNextShowing: false,
+
+    actions: {
+      textShow() {
+        this.set('isNextShowing', true);
+      }
     }
   }
+
 });
