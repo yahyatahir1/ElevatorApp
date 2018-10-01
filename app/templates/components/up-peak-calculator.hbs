@@ -56,6 +56,16 @@
       </div>
 
       <div class="col-sm-4 pb-5">
+        <label>Average number of stops</label>
+        {{input class="form-control" value=calc.input.s}}
+      </div>
+
+      <div class="col-sm-4 pb-5">
+        <label>Distance to reach reversal floor H excluding express zone (m)</label>
+        {{input class="form-control" value=calc.input.dh}}
+      </div>
+
+      <div class="col-sm-4 pb-5">
         <label>Contract (rated) speed (m/s)</label>
 
         <div class="form-check mt-2">
@@ -105,6 +115,7 @@
           </label>
         </div>
       </div>
+
     </div>
 
     <!-- Next which allows the user to move to the next stage -->
@@ -217,8 +228,13 @@
           </tr>
 
           <tr>
+            <td>TFD</td>
+            <td>{{calc.input.Tfd}}</td>
+          </tr>
+
+          <tr>
             <td>New Formula</td>
-            <td>{{calc.input.Tf}}</td>
+            <td>{{calc.input.flightTimeTD}}</td>
           </tr>
         </tbody>
       </table>

@@ -77,6 +77,9 @@ export default class UpPeakCalculator
       // Door opening time (s)
       'to': 1.8,
 
+      // Advanced door opening time (s)
+      'ta': 1.5,
+
       // Round trip time losses (%)
       'LOSS': 5,
 
@@ -91,6 +94,12 @@ export default class UpPeakCalculator
 
       // Allowance for motor start delay (s)
       'tStart': 74,
+
+      // Distance to reach reversal floor H excluding express zone (m)
+      'dh': 12,
+
+      // Average number of stops
+      's': 4,
     };
 
     /**
@@ -174,8 +183,12 @@ export default class UpPeakCalculator
         return this.calculatePOP();
       break;
 
+      case 'Tfd':
+        return this.calculateTfd();
+      break;
+
       case 'Tf':
-        return this.calculateTf();
+        return this.calculateflightTimeTD();
       break;
     }
   }
@@ -366,6 +379,28 @@ export default class UpPeakCalculator
   }
 
   /**
+  * Calculates the average distance between stops
+  * @return {number}
+  * @example
+  * calc.get('Tfd');
+  */
+  calculateTfd()
+  {
+    return this.get('dh') / this.get('s');
+  }
+
+  /**
+  * Calculates The difference between this and the assumed time can be substituted into an enhanced equation for ts which becomes
+  * @return {number}
+  * @example
+  * calc.get('flightTimeTD');
+  */
+  calculateflightTimeTD()
+  {
+    return (this.get('dh') / this.get('s') - this.get('dh') / this.get('S') * this.get('v')) + this.get('tc') + this.get('to') - this.get('ta');
+  }
+
+  /**
   * Calculates the handling capacity, expressed as a percentage of the building population transported in five minutes
   * @return {number}
   * @example
@@ -448,7 +483,8 @@ export default class UpPeakCalculator
       'UPPINT',
       'UPPHC',
       'POP',
-      'Tf'
+      'Tfd',
+      'flightTimeTD',
     ];
 
     // Calculate and store the values

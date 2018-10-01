@@ -44,7 +44,7 @@ export default Component.extend({
     });
   },
 
-  reRunCalculator: Ember.observer('inputUpdated', 'calc.input.{LOSS,to,tc,L,pass,tl,tu,CF,CC,df,v}', function()
+  reRunCalculator: Ember.observer('inputUpdated', 'calc.input.{LOSS,to,tc,L,pass,tl,tu,CF,CC,df,v,s,dh}', function()
   {
     // Run the calculator
     this.get('calc').run();
