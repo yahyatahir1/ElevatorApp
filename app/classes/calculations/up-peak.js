@@ -87,7 +87,7 @@ export default class UpPeakCalculator
       'pass': 5,
 
       // Transmit Time Function
-      'd': 2,
+      'd': 2
     };
 
     /**
@@ -362,57 +362,64 @@ export default class UpPeakCalculator
     return this.get('UPPHC') * 100 / this.get('Ueff');
   }
 
-    /**
-    * Calculates the handling capacity, expressed as a percentage of the building population transported in five minutes
-    * @return {number}
-    * @example
-    * calc.get('Tf');
-    */
-    calculateTf()
-    {
-      // Get our totals
-      let total1 = (
-        (((Math.pow(this.get('a')[this.get('v')], 2) * this.get('v')) + (Math.pow(this.get('v'), 2) * this.get('j'))) / (this.get('j') * a))
-      );
+  /**
+  * Calculates the handling capacity, expressed as a percentage of the building population transported in five minutes
+  * @return {number}
+  * @example
+  * calc.get('Tf');
+  */
+  calculateTf()
+  {
+    let v = this.get('v');
+    let a = this.get('a')[this.get('v')];
+    let j = this.get('j');
+    let d = this.get('d');
 
-      let total2 = (
-        2 * Math.pow(this.get('a')[this.get('v')], 3) / Math.pow(this.get('j'), 2)
-      );
+    // Get our totals
+    let total1 = (
+      ((Math.pow(this.get('a')[this.get('v')], 2) * this.get('v')) + (Math.pow(this.get('v'), 2) * this.get('j'))) /
+      (this.get('j') * a)
+    );
 
-      // Condition 1 formula
-      if (this.get('d') >= total1) {
+    let total2 = (
+      2 * Math.pow(this.get('a')[this.get('v')], 3) / Math.pow(this.get('j'), 2)
+    );
 
-        // Calculate the result
-        let result = (this.get('d') / this.get('v')) + (this.get('a')[this.get('v')] / this.get('j')) + (this.get('v') / this.get('a')[this.get('v')]);
+    // Condition 1 formula
+    if (this.get('d') >= total1) {
 
-        // Return the result
-        return result;
-      }
-      // Condition 2 formula
-      else if (total2 <= this.get('d') && this.get('d') < total1) {
+      // Calculate the result
+      let result = (this.get('d') / this.get('v')) + (this.get('a')[this.get('v')] / this.get('j')) + (this.get('v') / this.get('a')[this.get('v')]);
 
-        // Calculate the result
-        let result = ((this.get('a')[this.get('v')] / this.get('j')) + Math.sqrt(((4 * this.get('d')) / this.get('a')[this.get('v')]) + (a / this.get('j'))));
-
-        // Return the result
-        return result;
-      }
-
-      // Condition 3 formula
-      else if (this.get('d') < total2) {
-
-        // Calculate the result
-        let result = (Math.pow((32 * this.get('d')) / this.get('j'), 1 / 3));
-
-        // Return the result
-        return result;
-      }
-
-      // Invalid input
-      else {
-        alert('Invalid Input');
-      }
+      // Return the result
+      return result;
     }
+
+    // Condition 2 formula
+    else if (total2 <= this.get('d') && this.get('d') < total1) {
+
+      // Calculate the result
+      let result = ((this.get('a')[this.get('v')] / this.get('j')) + Math.sqrt(((4 * this.get('d')) / this.get('a')[this.get('v')]) + (a / this.get('j'))));
+
+      // Return the result
+      return result;
+    }
+
+    // Condition 3 formula
+    else if (this.get('d') < total2) {
+
+      // Calculate the result
+      let result = (Math.pow((32 * this.get('d')) / this.get('j'), 1 / 3));
+
+      // Return the result
+      return result;
+    }
+
+    // Invalid input
+    else {
+      alert('Invalid Input');
+    }
+  }
 
   /**
   * Runs the full calculation and stores the values in the output property of the {@link UpPeakCalculator} instance.
