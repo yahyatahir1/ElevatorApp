@@ -87,7 +87,10 @@ export default class UpPeakCalculator
       'pass': 5,
 
       // Transmit Time Function
-      'd': 2
+      'd': 2,
+
+      // Allowance for motor start delay (s)
+      'tStart': 74,
     };
 
     /**
@@ -374,6 +377,7 @@ export default class UpPeakCalculator
     let a = this.get('a')[this.get('v')];
     let j = this.get('j');
     let d = this.get('d');
+    let tStart = this.get('tStart');
 
     // Get our totals
     let total1 = (
@@ -399,7 +403,7 @@ export default class UpPeakCalculator
     else if (total2 <= this.get('d') && this.get('d') < total1) {
 
       // Calculate the result
-      let result = ((this.get('a')[this.get('v')] / this.get('j')) + Math.sqrt(((4 * this.get('d')) / this.get('a')[this.get('v')]) + (a / this.get('j'))));
+      let result = ((this.get('a')[this.get('v')] / this.get('j')) + Math.sqrt((Math.pow(this.get('a')[this.get('v')]),3) + (4 * this.get('d') * Math.pow(this.get('j'),2)) / Math.sqrt(this.get('a')[this.get('v')]) * this.get('j') + this.get('tStart')));
 
       // Return the result
       return result;
@@ -409,7 +413,7 @@ export default class UpPeakCalculator
     else if (this.get('d') < total2) {
 
       // Calculate the result
-      let result = (Math.pow((32 * this.get('d')) / this.get('j'), 1 / 3));
+      let result = (Math.pow((32 * this.get('d')) / this.get('j'), 1 / 3) + this.get('tStart'));
 
       // Return the result
       return result;
