@@ -190,6 +190,12 @@ export default class UpPeakCalculator
       case 'Tf':
         return this.calculateFlightTimeTD();
       break;
+
+      case 'ImprovedRTT':
+        return this.calculateImprovedRTT();
+      break;
+
+
     }
   }
 
@@ -333,6 +339,20 @@ export default class UpPeakCalculator
       (2 * this.get('H') * this.get('tv')) + (this.get('S') + 1) * this.get('ts') + (2 * this.get('P') * this.get('tp'))
     );
   }
+
+  /**
+  * Calculates the Round Trip Time is the time taken for the travel to/from the highest reversal floor at contract speed, plus the delay for each stop, plus the time for the passengers to load/unload.
+  * @return {number}
+  * @example
+  * calc.get('ImprovedRTT');
+  */
+  calculateImprovedRTT()
+  {
+    return (
+      (2 * this.get('dh') / this.get('v')) + (this.get('s') + 1) * this.get('ts') + (2 * this.get('P') * this.get('tp'))
+    );
+  }
+
 
   /**
   * Calculates the Round Trip Time in addition to any losses. Some designers add 5-10% to the Round Trip Time for “losses” associated with controller inefficiencies, passengers holding the doors, and so on.
@@ -485,6 +505,7 @@ export default class UpPeakCalculator
       'POP',
       'Tfd',
       'Tf',
+      'ImprovedRTT',
     ];
 
     // Calculate and store the values
