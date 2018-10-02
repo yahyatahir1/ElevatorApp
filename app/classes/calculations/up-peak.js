@@ -188,7 +188,7 @@ export default class UpPeakCalculator
       break;
 
       case 'Tf':
-        return this.calculateflightTimeTD();
+        return this.calculateFlightTimeTD();
       break;
     }
   }
@@ -393,9 +393,9 @@ export default class UpPeakCalculator
   * Calculates The difference between this and the assumed time can be substituted into an enhanced equation for ts which becomes
   * @return {number}
   * @example
-  * calc.get('flightTimeTD');
+  * calc.get('Tf');
   */
-  calculateflightTimeTD()
+  calculateFlightTimeTD()
   {
     return (this.get('dh') / this.get('s') - this.get('dh') / this.get('S') * this.get('v')) + this.get('tc') + this.get('to') - this.get('ta');
   }
@@ -484,7 +484,7 @@ export default class UpPeakCalculator
       'UPPHC',
       'POP',
       'Tfd',
-      'flightTimeTD',
+      'Tf',
     ];
 
     // Calculate and store the values
