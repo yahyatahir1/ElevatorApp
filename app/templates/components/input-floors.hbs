@@ -1,0 +1,30 @@
+<!-- Add Floor -->
+<div class="row mt-5">
+  <div class="col-sm-6 pb-5">
+    <label>Population</label>
+    {{input class="form-control" value=newFloor.population}}
+  </div>
+
+  <div class="col-sm-6 pb-5">
+    <button class="btn btn-lg btn-primary" {{action 'addNewFloor'}}>
+      Add Floor
+    </button>
+  </div>
+</div>
+
+<!-- Floors -->
+<table class="table m-3">
+  <tbody>
+    <tr>
+      <th>Floor No.</th>
+      <th>Population</th>
+    </tr>
+
+    {{#each-in calc.input.U as |floorNumber population|}}
+      <tr>
+        <td>{{floorNumber}}</td>
+        <td>{{population}}</td>
+      </tr>
+    {{/each-in}}
+  </tbody>
+</table>

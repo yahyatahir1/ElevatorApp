@@ -1,0 +1,114 @@
+
+  <!-- Main Input -->
+  <div class="row mt-5">
+    <div class="col-sm-4 pb-5">
+      <label>Round trip time losses (%)</label>
+      {{input class="form-control" value=calc.input.LOSS}}
+    </div>
+
+    <div class="col-sm-4 pb-5">
+      <label>Door opening time (s)</label>
+      {{input class="form-control" value=calc.input.to}}
+    </div>
+
+    <div class="col-sm-4 pb-5">
+      <label>Door closing time (s)</label>
+      {{input class="form-control" value=calc.input.tc}}
+    </div>
+
+    <div class="col-sm-4 pb-5">
+      <label>Number of elevators</label>
+      {{input class="form-control" value=calc.input.L}}
+    </div>
+
+    <div class="col-sm-4 pb-5">
+      <label>Number of Passengers</label>
+      {{input class="form-control" value=calc.input.pass}}
+    </div>
+
+    <div class="col-sm-4 pb-5">
+      <label>Passenger loading time per person (s)</label>
+      {{input class="form-control" value=calc.input.tl}}
+    </div>
+
+    <div class="col-sm-4 pb-5">
+      <label>Passenger unloading time per person (s)</label>
+      {{input class="form-control" value=calc.input.tu}}
+    </div>
+
+    <div class="col-sm-4 pb-5">
+      <label>Capacity factor (%)</label>
+      {{input class="form-control" value=calc.input.CF}}
+    </div>
+
+    <div class="col-sm-4 pb-5">
+      <label>Car (rated) capacity (persons)</label>
+      {{input class="form-control" value=calc.input.CC}}
+    </div>
+
+    <div class="col-sm-4 pb-5">
+      <label>Average inter-floor height (m)</label>
+      {{input class="form-control" value=calc.input.df}}
+    </div>
+
+    <div class="col-sm-4 pb-5">
+      <label>Average number of stops</label>
+      {{input class="form-control" value=calc.input.s}}
+    </div>
+
+    <div class="col-sm-4 pb-5">
+      <label>Distance to reach reversal floor H excluding express zone (m)</label>
+      {{input class="form-control" value=calc.input.dh}}
+    </div>
+
+    <div class="col-sm-4 pb-5">
+      <label>Contract (rated) speed (m/s)</label>
+
+      <div class="form-check mt-2">
+        <label class="form-check-label">
+          <input class="form-check-input" type="radio" name="calc-input-v" value="1" onclick={{action (mut calc.input.v) value="target.value"}} checked>
+          1
+
+          <span class="circle">
+            <span class="check"></span>
+          </span>
+        </label>
+
+        <label class="form-check-label ml-3">
+          <input class="form-check-input" type="radio" name="calc-input-v" value="1.5" onclick={{action (mut calc.input.v) value="target.value"}}>
+          1.5
+
+          <span class="circle">
+            <span class="check"></span>
+          </span>
+        </label>
+
+        <label class="form-check-label ml-3">
+          <input class="form-check-input" type="radio" name="calc-input-v" value="2.5" onclick={{action (mut calc.input.v) value="target.value"}}>
+          2.5
+
+          <span class="circle">
+            <span class="check"></span>
+          </span>
+        </label>
+
+        <label class="form-check-label ml-3">
+          <input class="form-check-input" type="radio" name="calc-input-v" value="3.5" onclick={{action (mut calc.input.v) value="target.value"}}>
+          3.5
+
+          <span class="circle">
+            <span class="check"></span>
+          </span>
+        </label>
+
+        <label class="form-check-label ml-3">
+          <input class="form-check-input" type="radio" name="calc-input-v" value="5" onclick={{action (mut calc.input.v) value="target.value"}}>
+          5
+
+          <span class="circle">
+            <span class="check"></span>
+          </span>
+        </label>
+      </div>
+    </div>
+  </div>

@@ -3,248 +3,25 @@
   <div class="section section-basic">
     <h2>Up Peak Calculator</h2>
 
-    <!-- Input -->
-    <div class="row mt-5">
-      <div class="col-sm-4 pb-5">
-        <label>Round trip time losses (%)</label>
-        {{input class="form-control" value=calc.input.LOSS}}
-      </div>
-
-      <div class="col-sm-4 pb-5">
-        <label>Door opening time (s)</label>
-        {{input class="form-control" value=calc.input.to}}
-      </div>
-
-      <div class="col-sm-4 pb-5">
-        <label>Door closing time (s)</label>
-        {{input class="form-control" value=calc.input.tc}}
-      </div>
-
-      <div class="col-sm-4 pb-5">
-        <label>Number of elevators</label>
-        {{input class="form-control" value=calc.input.L}}
-      </div>
-
-      <div class="col-sm-4 pb-5">
-        <label>Number of Passengers</label>
-        {{input class="form-control" value=calc.input.pass}}
-      </div>
-
-      <div class="col-sm-4 pb-5">
-        <label>Passenger loading time per person (s)</label>
-        {{input class="form-control" value=calc.input.tl}}
-      </div>
-
-      <div class="col-sm-4 pb-5">
-        <label>Passenger unloading time per person (s)</label>
-        {{input class="form-control" value=calc.input.tu}}
-      </div>
-
-      <div class="col-sm-4 pb-5">
-        <label>Capacity factor (%)</label>
-        {{input class="form-control" value=calc.input.CF}}
-      </div>
-
-      <div class="col-sm-4 pb-5">
-        <label>Car (rated) capacity (persons)</label>
-        {{input class="form-control" value=calc.input.CC}}
-      </div>
-
-      <div class="col-sm-4 pb-5">
-        <label>Average inter-floor height (m)</label>
-        {{input class="form-control" value=calc.input.df}}
-      </div>
-
-      <div class="col-sm-4 pb-5">
-        <label>Average number of stops</label>
-        {{input class="form-control" value=calc.input.s}}
-      </div>
-
-      <div class="col-sm-4 pb-5">
-        <label>Distance to reach reversal floor H excluding express zone (m)</label>
-        {{input class="form-control" value=calc.input.dh}}
-      </div>
-
-      <div class="col-sm-4 pb-5">
-        <label>Contract (rated) speed (m/s)</label>
-
-        <div class="form-check mt-2">
-          <label class="form-check-label">
-            <input class="form-check-input" type="radio" name="calc-input-v" value="1" onclick={{action (mut calc.input.v) value="target.value"}} checked>
-            1
-
-            <span class="circle">
-              <span class="check"></span>
-            </span>
-          </label>
-
-          <label class="form-check-label ml-3">
-            <input class="form-check-input" type="radio" name="calc-input-v" value="1.5" onclick={{action (mut calc.input.v) value="target.value"}}>
-            1.5
-
-            <span class="circle">
-              <span class="check"></span>
-            </span>
-          </label>
-
-          <label class="form-check-label ml-3">
-            <input class="form-check-input" type="radio" name="calc-input-v" value="2.5" onclick={{action (mut calc.input.v) value="target.value"}}>
-            2.5
-
-            <span class="circle">
-              <span class="check"></span>
-            </span>
-          </label>
-
-          <label class="form-check-label ml-3">
-            <input class="form-check-input" type="radio" name="calc-input-v" value="3.5" onclick={{action (mut calc.input.v) value="target.value"}}>
-            3.5
-
-            <span class="circle">
-              <span class="check"></span>
-            </span>
-          </label>
-
-          <label class="form-check-label ml-3">
-            <input class="form-check-input" type="radio" name="calc-input-v" value="5" onclick={{action (mut calc.input.v) value="target.value"}}>
-            5
-
-            <span class="circle">
-              <span class="check"></span>
-            </span>
-          </label>
-        </div>
-      </div>
-
-    </div>
+    {{input-main
+      calc=calc
+    }}
 
     <!-- Next which allows the user to move to the next stage -->
     {{#if isNextOne}}
 
-    <!-- Add Floor -->
-    <div class="row mt-5">
-      <div class="col-sm-6 pb-5">
-        <label>Population</label>
-        {{input class="form-control" value=newFloor.population}}
-      </div>
-
-      <div class="col-sm-6 pb-5">
-        <button class="btn btn-lg btn-primary" {{action 'addNewFloor'}}>
-          Add Floor
-        </button>
-      </div>
-    </div>
-
-    <!-- Floors -->
-    <table class="table m-3">
-      <tbody>
-        <tr>
-          <th>Floor No.</th>
-          <th>Population</th>
-        </tr>
-
-        {{#each-in calc.input.U as |floorNumber population|}}
-          <tr>
-            <td>{{floorNumber}}</td>
-            <td>{{population}}</td>
-          </tr>
-        {{/each-in}}
-      </tbody>
-    </table>
+    {{input-floors
+      addNewFloor=(action "addNewFloor")
+      calc=calc
+    }}
 
     {{#if isNextTwo}}
+
     <!-- Results -->
     {{#if hasFloors}}
-      <table class="table mt-5">
-        <tbody>
-          <tr>
-            <th>Name</th>
-            <th>Result</th>
-          </tr>
-
-          <tr>
-            <td>Round Trip Time</td>
-            <td>{{results.RTT}}</td>
-          </tr>
-
-          <tr>
-            <td>Round Trip Time (incl. losses)</td>
-            <td>{{results.RTTPL}}</td>
-          </tr>
-
-          <tr>
-            <td>UPPINT</td>
-            <td>{{results.UPPINT}}</td>
-          </tr>
-
-          <tr>
-            <td>UPPHC</td>
-            <td>{{results.UPPHC}}</td>
-          </tr>
-
-          <tr>
-            <td>TP</td>
-            <td>{{results.tp}}</td>
-          </tr>
-
-          <tr>
-            <td>Number of Passengers</td>
-            <td>{{results.P}}</td>
-          </tr>
-
-          <tr>
-            <td>H</td>
-            <td>{{results.H}}</td>
-          </tr>
-
-          <tr>
-            <td>S</td>
-            <td>{{results.S}}</td>
-          </tr>
-
-          <tr>
-            <td>POP</td>
-            <td>{{results.POP}}</td>
-          </tr>
-
-          <tr>
-            <td>T</td>
-            <td>{{results.T}}</td>
-          </tr>
-
-          <tr>
-            <td>TV</td>
-            <td>{{results.tv}}</td>
-          </tr>
-
-          <tr>
-            <td>S</td>
-            <td>{{results.S}}</td>
-          </tr>
-
-          <tr>
-            <td>UEFF</td>
-            <td>{{results.Ueff}}</td>
-          </tr>
-
-          <tr>
-            <td>New Formula</td>
-            <td>{{results.Tf}}</td>
-          </tr>
-
-          <tr>
-            <td>TFD</td>
-            <td>{{results.Tfd}}</td>
-          </tr>
-
-          <tr>
-            <td>Improved RTT</td>
-            <td>{{results.ImprovedRTT}}</td>
-          </tr>
-
-
-        </tbody>
-      </table>
+      {{display-results
+        results=results
+      }}
     {{/if}}
 
     {{else}}
