@@ -6,11 +6,6 @@ export default Component.extend({
   // This will contain our results
   results: {},
 
-  // New floor
-  newFloor: {
-    population: null
-  },
-
   // Hides text
   isNextOne: false,
   isNextTwo: false,
@@ -58,24 +53,6 @@ export default Component.extend({
     {
       // Reset the input values
       this.set('calc.input', JSON.parse(JSON.stringify(this.get('calc.defaultInput'))));
-
-      // Flag the input has been updated
-      this.set('inputUpdated', Date.now());
-    },
-
-    addNewFloor()
-    {
-      // Get the index of the new floor
-      let newFloorIndex = Object.keys(this.get('calc.input.U')).length + 1;
-
-      // Add the new floor with it's population
-      this.set(`calc.input.U.${newFloorIndex}`, parseFloat(this.get('newFloor.population')));
-
-      // Clear the population field
-      this.set('newFloor.population', null);
-
-      // Update the number of floors above the main terminal
-      this.set('calc.input.N', newFloorIndex - 1);
 
       // Flag the input has been updated
       this.set('inputUpdated', Date.now());
