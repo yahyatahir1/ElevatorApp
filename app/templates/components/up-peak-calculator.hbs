@@ -3,6 +3,7 @@
   <div class="section section-basic">
     <h2>Up Peak Calculator</h2>
 
+    <!-- Input-Main component -->
     {{input-main
       calc=calc
     }}
@@ -10,15 +11,18 @@
     <!-- Next which allows the user to move to the next stage -->
     {{#if isNextOne}}
 
+    <!-- Input-floors component -->
     {{input-floors
-      addNewFloor=(action "addNewFloor")
       calc=calc
+      inputUpdated=inputUpdated
     }}
 
     {{#if isNextTwo}}
 
     <!-- Results -->
     {{#if hasFloors}}
+
+      <!-- display-results component -->
       {{display-results
         results=results
       }}
