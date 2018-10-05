@@ -6,9 +6,16 @@ export default Component.extend({
   // This will contain our results
   results: {},
 
-  // Hides text
-  isNextOne: false,
-  isNextTwo: false,
+  // // Hides text
+  // isNextOne: false,
+  // isNextTwo: false,
+
+  currentSection: '1',
+
+  isSection1: Ember.computed.equal('currentSection', '1'),
+  isSection2: Ember.computed.equal('currentSection', '2'),
+  isSection3: Ember.computed.equal('currentSection', '3'),
+
 
   // Check if the user has added floors
   hasFloors: Ember.computed('inputUpdated', function()
@@ -16,8 +23,11 @@ export default Component.extend({
     // Get the number of floors
     let numberOfFloors = Object.keys(this.get('calc.input.U')).length;
 
+    let height = this.get('calc.input.height');
+
     // Check if we have more than one floor
     return numberOfFloors > 1 ? true : false;
+    return height;
   }),
 
   inputUpdated: null,
@@ -58,11 +68,11 @@ export default Component.extend({
       this.set('inputUpdated', Date.now());
     },
 
-    nextOne() {
-      this.set('isNextOne', true);
-    },
-    NextTwo() {
-      this.set('isNextTwo', true);
-    }
+    // nextOne() {
+    //   this.set('isNextOne', true);
+    // },
+    // NextTwo() {
+    //   this.set('isNextTwo', true);
+    // }
   }
 });

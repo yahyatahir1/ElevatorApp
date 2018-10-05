@@ -38,6 +38,11 @@ export default class UpPeakCalculator
         '1': 0
       },
 
+      // Height of floors
+      'height': {
+        '1': 0
+      },
+
       // Jerk (m/s/s/s)
       'j': 1.4,
 
@@ -421,7 +426,7 @@ export default class UpPeakCalculator
   }
 
   /**
-  * Calculates the handling capacity, expressed as a percentage of the building population transported in five minutes
+  * Calculates the transmit time function
   * @return {number}
   * @example
   * calc.get('Tf');

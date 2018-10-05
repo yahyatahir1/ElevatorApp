@@ -3,47 +3,49 @@
   <div class="section section-basic">
     <h2>Up Peak Calculator</h2>
 
-    <!-- Input-Main component -->
-    {{input-main
-      calc=calc
-    }}
-
-    <!-- Next which allows the user to move to the next stage -->
-    {{#if isNextOne}}
-
-    <!-- Input-floors component -->
-    {{input-floors
-      calc=calc
-      inputUpdated=inputUpdated
-    }}
-
-    {{#if isNextTwo}}
-
-    <!-- Results -->
-    {{#if hasFloors}}
-
-      <!-- display-results component -->
-      {{display-results
-        results=results
-      }}
+    <!-- Section 1 which shows the main input component -->
+    {{#if isSection1}}
+      {{input-main
+        calc=calc}}
     {{/if}}
 
-    {{else}}
-      <button class="btn btn-lg btn-primary" {{action 'NextTwo'}}>
+
+    <!-- Section 2 which shows the input floors component -->
+    {{#if isSection2}}
+
+      {{input-floors
+        calc=calc
+        inputUpdated=inputUpdated}}
+
+      {{else}}
+        <button class="btn btn-lg btn-primary" {{action (mut currentSection) '2'}}>
+          Next
+        </button>
+    {{/if}}
+
+    <!-- Section 3 which shows the results component -->
+    {{#if isSection3}}
+
+      <!-- Results -->
+      {{#if hasFloors}}
+
+      {{display-results
+        results=results}}
+
+      {{/if}}
+
+      {{else}}
+      <button class="btn btn-lg btn-primary" {{action (mut currentSection) '3'}}>
         Show Results
       </button>
+
     {{/if}}
 
-    <!-- Reset function -->
-    <button class="btn btn-lg btn-primary" {{action 'resetCalculator'}}>
+
+    <!-- Reset function which also takes the user back to section 1 -->
+    <button class="btn btn-lg btn-primary" {{action 'resetCalculator'}}{{action (mut currentSection) '1'}}>
       Reset Calculator
     </button>
-
-    {{else}}
-      <button class="btn btn-lg btn-primary" {{action 'nextOne'}}>
-        Next
-      </button>
-    {{/if}}
 
   </div>
 {{/if}}

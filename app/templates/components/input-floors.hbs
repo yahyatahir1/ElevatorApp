@@ -6,24 +6,31 @@
   </div>
 
   <div class="col-sm-6 pb-5">
+    <label>Floor Height</label>
+    {{input class="form-control" value=newFloor.height}}
+  </div>
+
+  <div class="col-sm-6 pb-5">
     <button class="btn btn-lg btn-primary" {{action 'addNewFloor'}}>
       Add Floor
     </button>
   </div>
 </div>
 
-<!-- Floors -->
+<!-- Floors display-->
 <table class="table m-3">
   <tbody>
     <tr>
       <th>Floor No.</th>
       <th>Population</th>
+      <th>Height</th>
     </tr>
 
-    {{#each-in calc.input.U as |floorNumber population|}}
+    {{#each-in calc.input.U as |floorNumber population height|}}
       <tr>
         <td>{{floorNumber}}</td>
         <td>{{population}}</td>
+        <td>{{height}}</td>
       </tr>
     {{/each-in}}
   </tbody>
